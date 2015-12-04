@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html ng-app="listaImoveis">
+	<head>
+	<meta charset="UTF-8">
+		<title>MB</title>
+		<link rel="shortcut icon" href="favicon.png">
+		<link rel="stylesheet" href="lib/css/bootstrap.min.css">
+		<link rel="stylesheet" href="lib/css/css.css">
+
+		<script type="text/javascript" src="lib/js/angular.min.js"></script>
+	<script type="text/javascript">
+	angular.module("listaImoveis",[]);
+	angular.module("listaImoveis").controller("listaImoveisCtrl", function($scope){
+		$scope.app = "Lista Imoveis";
+		$scope.imoveis = [
+
+			{imagem: "media/u215/casa2.png", tipo: "Aluguel", valor: "275", endereco: "Virgilio Antunes", numero: "256", bairro: "São Benedito"},
+
+			{imagem: "media/u216/casa1.png", tipo: "Temporada", valor: "255", endereco: "Virgilio Antunes", numero: "SN", bairro: "São Sebastião"},
+
+			{imagem: "media/u217/casa3.png", tipo: "Venda", valor: "350", endereco: "Pinheiro Machado", numero: "25", bairro: "São Benedito"},
+
+			{imagem: "media/u218/casa4.png", tipo: "Alugel", valor: "350", endereco: "São Sebastião", numero: "SN", bairro: "Centro"},
+
+		];		
+
+		$scope.adicionarPopupContato =  function(contato){
+			$scope.contatos.push(angular.copy(contato));
+			delete $scope.contato; 
+			$scope.contatoForm.$setPrestine();
+		};
+
+	});
+
+	
+
+	</script>				
+	</head>
+	<body ng-controller="listaImoveisCtrl">
+
+	<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		      <a class="navbar-brand" href="#">
+				<img src="lib/images/logo.png" width="45px" style="margin-top:-13px;" alt="">
+		      </a>
+		    </div>
+
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul class="nav navbar-nav">
+		        <li class="active"><a href="#">Inicio <span class="sr-only">(current)</span></a></li>
+		        <li><a href="#">Funcionamento</a></li>
+		        <li class="dropdown">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Encontre <span class="caret"></span></a>
+		          <ul class="dropdown-menu">
+		            <li><a href="#">Alugar</a></li>
+		            <li><a href="#">Comprar</a></li>
+		            <li><a href="#">Temporada</a></li>
+		            <li role="separator" class="divider"></li>
+		            <li><a href="#">Especifico 1</a></li>
+		            <li role="separator" class="divider"></li>
+		            <li><a href="#">Especifico 2</a></li>
+		          </ul>
+		        </li>
+		      </ul>
+		      <form class="navbar-form navbar-left" role="search">
+		        <div class="form-group">
+		          <input type="text" class="form-control" placeholder="Search">
+		        </div>
+		        <button type="submit" class="btn btn-default">Submit</button>
+		      </form>
+		      <ul class="nav navbar-nav navbar-right">
+		        <li><a href="#">Contato</a></li>
+		        <li class="dropdown">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Anuncie Gratis <span class="caret"></span></a>
+		          <ul class="dropdown-menu">
+		            <li><a href="#">Action</a></li>
+		            <li><a href="#">Another action</a></li>
+		            <li><a href="#">Something else here</a></li>
+		            <li role="separator" class="divider"></li>
+		            <li><a href="#">Separated link</a></li>
+		          </ul>
+		        </li>
+		      </ul>
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
+		
+
+		<div class="corpo"><!-- corpo da pagina -->
+			<div class="row" style="width: 100%;">
+
+			 	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12  casa" ng-repeat="imovel in imoveis">
+					<img src={{imovel.imagem}} alt="" class="img-casa-home">
+					<p class="dados-casa">
+						<strong>Tipo:</strong> {{imovel.tipo}}.<br>
+						<strong>Valor:</strong> {{imovel.valor}}<br>
+						<strong>Endereco:</strong> {{imovel.endereco}}. <strong>N.</strong> {{imovel.numero}}.<br>
+						
+						<strong>Bairro:</strong> {{imovel.bairro}}.<br>
+					</p>
+					<div class="form-inline">
+			
+					<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#ModalDetalhes">
+						<span class="glyphicon glyphicon-list-alt" aria-hidden="true">
+						Datalhes
+					</button>
+			
+					<button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#ModalContato">
+						<span class="glyphicon glyphicon-envelope" aria-hidden="true">
+						Contato
+					</button>
+			
+					</div>
+					<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d3984.6845152411415!2d-41.75838051100215!3d-2.906881566780218!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1447939279277" width="100%" height="50%" frameborder="0" style="border:0" allowfullscreen></iframe>
+				</div>
+			</div>
+		</div>
+
+
+			<!-- Modal Detalhes -->
+			<div id="ModalDetalhes" class="modal fade" role="dialog">  <div class="modal-dialog modal-lg">
+			    <!-- Modal content-->
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        <h4 class="modal-title">Detalhes</h4>
+			      </div>
+			      <div class="modal-body">
+			        
+
+			        <div class="row">
+				        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+	  							<img src="media/u216/casa1.png" width="99%" alt="">	
+	  					</div>
+  						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+  							<div>
+	  							<p>
+	  								<strong>Tipo:</strong> Aluguel.<br>
+									<strong>Valor:</strong> R$200,00<br>
+									<strong>Endereco:</strong> Virgilio Antunes N° 257.<br>
+									<strong>Bairro:</strong> São Benedito.<br>
+								
+	  								<strong>Quartos:</strong> 3.<br>
+									<strong>Salas:</strong> 1.<br>
+									<strong>Cozinhas:</strong> 1.<br>
+									<strong>Banheiros:</strong> 2.<br>
+									<strong>Quintal:</strong> Sim.<br>
+									<strong>Garagem:</strong> 2 vagas.<br>
+									<strong>Observações:</strong> Otimo estado de conservação, pintado a pouco tempo, piso de ceramica.
+								</p>
+  							</div>
+  							<div>
+  								<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d3984.6845152411415!2d-41.75838051100215!3d-2.906881566780218!3m2!1i1024!2i768!4f13.1!5e0!3m2!1spt-BR!2sbr!4v1447939279277" width="100%" height="10%" frameborder="0" style="border:0" allowfullscreen></iframe>
+  							</div>
+  						</div>
+					</div>
+
+					
+			      </div>
+			      <div class="modal-footer">
+
+					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalContato">
+					<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+					Contato
+					</button>
+
+					<button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalAnunciante" aria­-label="Left Align">
+					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+					Anunciante
+					</button>
+
+
+			      </div>
+			    </div>
+			  </div>
+			</div><!-- Fim Modal Detalhes -->
+
+			<!-- Modal Contato -->
+			<div id="ModalContato" class="modal fade" role="dialog">  <div class="modal-dialog">
+			    <!-- Modal content-->
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        <h4 class="modal-title">Contato</h4>
+			      </div>
+			      <div class="modal-body">
+
+					<div class="form form-group">
+					<label>Nome:</label>
+		          	<input type="text" class="form-control form" placeholder="Nome">
+		          	</div>
+
+		          	<div class="form-group">
+		          	<label>E-mail:</label>
+		          	<input type="text" class="form-control" placeholder="Nome">
+		          	</div>
+
+		          	<div class="form-group">
+		          	<label>Telefone:</label>
+		          	<input type="text" class="form-control" placeholder="Nome">
+		          	</div>
+
+		          	<div class="form-group">
+		          	<label>Mensagem:</label>
+		          	<textarea class="form-control" placeholder="Mansagem"></textarea>
+		          	</div>
+
+			      </div>
+			      <div class="modal-footer">
+			        
+			        <button type="button" class="btn btn-primary" data-dismiss="modal">
+				        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+				        Enviar
+			        </button>
+
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+						Limpar
+					</button>
+
+			      </div>
+			    </div>
+			  </div>
+			</div><!-- Fim Modal Contato -->
+
+			<!-- Modal Anunciante -->
+			<div id="ModalContato" class="modal fade" role="dialog">  <div class="modal-dialog">
+			    <!-- Modal content-->
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        <h4 class="modal-title">Contato</h4>
+			      </div>
+			      <div class="modal-body">
+					<div>
+						<img src="media/u215/u215.png" alt="">
+					</div>
+					<div>
+						<label>Nome:</label>
+			          	<label>E-mail:</label>
+			          	<label>Telefone:</label>
+		          	</div>
+
+			      </div>
+			      <div class="modal-footer">
+
+			        <button type="button" class="btn btn-primary" data-dismiss="modal">
+			        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+			        Enviar
+			        </button>
+
+					<button type="button" class="btn btn-default" data-dismiss="modal"></button>
+					<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+					Limpar
+					</button>
+
+			      </div>
+			    </div>
+			  </div>
+			</div><!-- Fim Modal Anunciante -->
+
+	</body>
+		<script src="lib/js/jquery-2.1.4.min.js"></script>
+		<script src="lib/js/bootstrap.min.js"></script>
+		
+
+</html>
